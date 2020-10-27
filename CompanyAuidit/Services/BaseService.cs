@@ -37,10 +37,9 @@ namespace CompanyAuidit.Services
             _context.SaveChanges();
         }
 
-        public List<TEntity> GetAll()
+        public  List<TEntity> GetAll()
         {
-            var a=_context.Set<TEntity>().ToList();
-            return a;
+            return _context.Set<TEntity>().ToList();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CompanyAuidit.Contexts;
 using CompanyAuidit.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace CompanyAuidit.Services
             _context = context;
         }
 
+       
     }
 }
