@@ -1,11 +1,10 @@
-﻿@using CompanyAuidit.Models
-@model CompanyAuidit.Models.ItemListViewModel
+﻿@model CompanyAuidit.Models.ItemListViewModel
 @{
     ViewData["Title"] = "RelationIndex";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var itemMessage = (string)TempData["ItemMessage"];
 }
-@*test*@
+
 <h3>Envanter Listesi</h3>
 
 @if (itemMessage != null)
@@ -80,7 +79,3 @@
     }
 
 </table>
-
-<script>
-
-</script>

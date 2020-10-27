@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CompanyAuidit.Contexts;
+﻿using System.Linq;
 using CompanyAuidit.Models;
 using CompanyAuidit.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CompanyAuidit.Controllers
 {
@@ -14,7 +9,8 @@ namespace CompanyAuidit.Controllers
     {
         private readonly UserItemService _userItemService;
         private readonly ItemService _itemService;
-        private CategoryService _categoryService;
+        private readonly CategoryService _categoryService;
+        
 
         public ItemController(UserItemService userItemService, ItemService itemService, CategoryService categoryService)
         {
@@ -132,10 +128,13 @@ namespace CompanyAuidit.Controllers
             var item = new Item();
             if (ModelState.IsValid)
             {
-                item.Id = result.Id;
-                item.ItemType.Name = result.ItemType.Name;
-                item.Description = result.Description;
-                item.Cost = result.Cost;
+                if (result != null)
+                {
+                    item.Id = result.Id;
+                    item.ItemType.Name = result.ItemType.Name;
+                    item.Description = result.Description;
+                    item.Cost = result.Cost;
+                }
             }
             return View(item);
         }
