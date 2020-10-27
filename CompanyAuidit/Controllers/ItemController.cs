@@ -27,11 +27,11 @@ namespace CompanyAuidit.Controllers
             return View(result);
         }
 
-        //[HttpGet]
-        //public IActionResult AddItem()
-        //{
-        //    return View(new Item());
-        //}
+        [HttpGet]
+        public IActionResult AddItem()
+        {
+            return View(new Item());
+        }
 
 
         [HttpPost]
@@ -82,6 +82,7 @@ namespace CompanyAuidit.Controllers
                 Items = _itemService.GetAll()
             };
 
+            var item = _itemService.GetItemType();
             return View(itemListViewModel);
         }
 

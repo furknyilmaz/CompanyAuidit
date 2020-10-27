@@ -41,5 +41,10 @@ namespace CompanyAuidit.Services
         {
             return _context.Set<TEntity>().ToList();
         }
+
+        public List<Item> GetItemType()
+        {
+            return _context.Items.Include(x => x.ItemType).ToList();
+        }
     }
 }
