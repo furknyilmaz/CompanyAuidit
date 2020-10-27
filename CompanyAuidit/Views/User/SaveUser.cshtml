@@ -1,0 +1,47 @@
+﻿@model CompanyAuidit.Models.User
+
+
+@{
+    Layout = null;
+}
+
+<link rel="stylesheet" href="~/css/cssroot.css" />
+
+<!DOCTYPE html>
+
+<form asp-controller="User" asp-action="SaveUser" method="post" autocomplete="off" class="form">
+    <div class="form-inner">
+        <h2>
+            Kullanıcı Ekle
+        </h2>
+        <div class="input-wrapper">
+            <label>FirstName</label>
+            <div class="input-group">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.FirstName" required="" placeholder="İsim" />
+            </div>
+        </div>
+        <div class="input-wrapper">
+            <label>LastName</label>
+            <div class="input-group">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.LastName" required="" placeholder="Soyisim" />
+            </div>
+        </div>
+        <div class="input-wrapper">
+            <label>Department</label>
+            <div class="input-group">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.Department" required="" placeholder="Birim" />
+            </div>
+        </div>
+        <div class="input-wrapper">
+            <label>Mission</label>
+            <div class="input-group">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.Mission" required="" placeholder="Görev" />
+            </div>
+        </div>
+        <div class="btn-group">
+            <button type="submit" class="btn btn-success">Kaydet</button>
+            <button type="submit" asp-action="SaveUser2" class="btn btn-primary">Kaydet ve Geri Dön</button>
+            <a class="btn btn-dark" asp-action="UserList">Vazgeç</a>
+        </div>
+    </div>
+</form>

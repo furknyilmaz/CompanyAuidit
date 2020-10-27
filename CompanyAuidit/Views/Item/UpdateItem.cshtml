@@ -1,0 +1,48 @@
+﻿@model CompanyAuidit.Models.Item
+@{
+    ViewData["Title"] = "UpdateItem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+
+<link rel="stylesheet" href="~/css/cssroot.css" />
+
+
+
+<form ,="" asp-controller="Item" asp-action="UpdateItem" method="post" autocomplete="off" class="form">
+    <div class="form-inner">
+        <h2>
+            Eşya Güncelle
+        </h2>
+        <div class="input-wrapper">
+            <label>Adı</label>
+            <div class="input-group">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.ItemType.Name" required="" placeholder="Adı" />
+            </div>
+        </div>
+        <div class="input-wrapper">
+            <label>Açıklama</label>
+            <div class="input-group">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.Description" required="" placeholder="Açıklama" />
+            </div>
+        </div>
+        <div class="input-wrapper">
+            <label>Değer</label>
+            <div class="input-group">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.Cost" required="" placeholder="Değer" />
+            </div>
+        </div>
+        <div class="input-wrapper">
+            <label>Seri Numarası</label>
+            <div class="input-group">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.SerialNumber" required="" placeholder="Seri Numarası" />
+            </div>
+        </div>
+        <div class="btn-group">
+            <button type="submit" class="btn btn-success" onclick="showAlert();">Kaydet ve Geri Dön</button>
+            <a class="btn btn-dark" href="/Item/ItemList">Vazgeç</a>
+        </div>
+    </div>
+</form>

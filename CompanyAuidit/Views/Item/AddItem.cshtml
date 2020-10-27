@@ -1,0 +1,72 @@
+﻿@model CompanyAuidit.Models.Item
+@{
+    ViewData["Title"] = "AddItem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+
+<link rel="stylesheet" href="~/css/cssroot.css" />
+
+@*<div class="box">
+
+
+
+        <form asp-controller="Item" asp-action="AddItem" method="post">
+            <h3>Eşya Ekle</h3>
+            <div class="input-container">
+                <input asp-for="@Model.Name" required="" placeholder="Adı" />
+
+            </div>
+            <div class="input-container">
+                <input asp-for="@Model.Status" required="" placeholder="Durum" />
+
+            </div>
+            <div class="input-container">
+                <input asp-for="@Model.Cost" required="" placeholder="Değer" />
+
+            </div>
+
+            <button type="submit" class="btn btn-danger" onclick="showAlert();">Kaydet</button>
+            <button class="btn btn-danger" href="/Home/Index">Ana Sayfa</button>
+        </form>
+    </div>*@
+
+<form ,="" asp-controller="Item" asp-action="AddItem" method="post" autocomplete="off" class="form">
+    <div class="form-inner">
+        <h2>
+            Eşya Ekle
+        </h2>
+        <div class="input-wrapper">
+            <label>Adı</label>
+            <div class="input-group">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.ItemType.Name" required="" placeholder="Adı" />
+            </div>
+        </div>
+        <div class="input-wrapper">
+            <label>Açıklama</label>
+            <div class="input-group">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.Description" required="" placeholder="Açıklama" />
+            </div>
+        </div>
+        <div class="input-wrapper">
+            <label>Değer</label>
+            <div class="input-group">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.Cost" required="" placeholder="Değer" />
+            </div>
+        </div>
+        <div class="input-wrapper">
+            <label>Seri Numarası</label>
+            <div class="input-group">
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input type="number" asp-for="@Model.SerialNumber" required="" placeholder="Seri Numarası" />
+            </div>
+        </div>
+        <div class="btn-group">
+            <button type="submit" asp-action="AddItem" class="btn btn-success">Kaydet</button>
+            <button type="submit" asp-action="AddItem2" class="btn btn-primary">Kaydet ve GeriDön</button>
+            <a class="btn btn-dark" href="/Item/ItemList">Vazgeç</a>
+        </div>
+    </div>
+</form>

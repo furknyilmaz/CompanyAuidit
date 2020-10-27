@@ -1,0 +1,86 @@
+﻿@using CompanyAuidit.Models
+@model CompanyAuidit.Models.ItemListViewModel
+@{
+    ViewData["Title"] = "RelationIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var itemMessage = (string)TempData["ItemMessage"];
+}
+@*test*@
+<h3>Envanter Listesi</h3>
+
+@if (itemMessage != null)
+{
+    <div class="alert alert-info" role="alert">
+        @itemMessage
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>Adı</th>
+        <th>Durumu</th>
+        <th>Değeri</th>
+        <th><a class="btn btn-success" asp-controller="Item" asp-action="AddItem">Eşya Ekle</a></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Items)
+    {
+        <tr>
+            <td>@item.ItemType.Name</td>
+            <td>@item.Description</td>
+            <td>@item.Cost</td>
+            <td>@item.SerialNumber</td>
+            <td>
+                <a class="btn btn-danger" asp-action="DeleteItem" asp-route-id="@item.Id" onclick="return confirm('@item.ItemType.Name adlı eşyayı silmek istiyor musunuz?')">Sil</a>
+                <a class="btn btn-success" asp-action="UpdateItem" asp-route-id="@item.Id">Güncelle</a>
+            </td>
+            <td>
+                @*<div class="dropdown">
+                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Kullanıcı İlişkilendir
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @foreach (var usr in Model.Users)
+                        {
+                            <a class="dropdown-item" id="deneme" asp-controller="Relation" asp-action="CreateUser" asp-route-userId="@usr.Id" asp-route-itemId="@item.Id">@usr.FirstName @usr.LastName</a>
+                        }
+
+                    </div>
+                </div>*@
+            </td>
+            @*<td>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">Kişi Listesi</button>
+                <div class="modal" id="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title">İlişkilendirme</h2>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="dropdown">
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Kullanıcılar
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        @foreach (var usr in Model.Users)
+                                        {
+                                            <a class="dropdown-item" asp-controller="Relation" asp-action="CreateUser" asp-route-userId="@usr.Id" asp-route-itemId="@item.Id" onclick="return confirm('@usr.FirstName @usr.LastName isimli kullanıcıya @item.Name eşya eklensin mi?')">@usr.FirstName @usr.LastName</a>
+                                        }
+
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>*@
+        </tr>
+    }
+
+</table>
+
+<script>
+
+</script>
