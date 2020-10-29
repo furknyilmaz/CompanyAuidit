@@ -89,6 +89,13 @@ namespace CompanyAuidit.Controllers
 
             return RedirectToAction(nameof(UserList));
         }
+        public IActionResult Delete(int userId)
+        {
+            var user = new User { Id = userId };
+            _context.Delete(user,userId);
+
+            return RedirectToAction(nameof(UserList));
+        }
 
         [HttpGet]
         public IActionResult UserUpdate(int id)

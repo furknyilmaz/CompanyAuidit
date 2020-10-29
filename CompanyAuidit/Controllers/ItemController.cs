@@ -21,14 +21,6 @@ namespace CompanyAuidit.Controllers
             _categoryService = categoryService;
         }
 
-
-        public IActionResult Index()
-        {
-            var result = _itemService.GetAll();
-
-            return View(result);
-        }
-
         [HttpGet]
         public IActionResult AddItem()
         {
@@ -103,20 +95,20 @@ namespace CompanyAuidit.Controllers
             return View(itemListViewModel);
         }
 
-        public IActionResult DeleteItem(int id)
-        {
-            Item item = new Item();
-            _itemService.Delete(item);
+        //public IActionResult DeleteItem(int id)
+        //{
+        //    Item item = new Item();
+        //    _itemService.Delete(item);
 
-            UserItem userItem = new UserItem();
+        //    UserItem userItem = new UserItem();
 
-            var userItems = _userItemService.GetAll().Where(x => x.ItemId == item.Id);
+        //    var userItems = _userItemService.GetAll().Where(x => x.ItemId == item.Id);
 
-            _userItemService.Delete(userItem);
+        //    _userItemService.Delete(userItem);
 
 
-            return RedirectToAction(nameof(ItemList));
-        }
+        //    return RedirectToAction(nameof(ItemList));
+        //}
 
         [HttpPost]
         public IActionResult UpdateItem(Item model)

@@ -36,6 +36,7 @@
             <td>@item.Mission</td>
             <td>
                 <a class="btn btn-success" asp-action="UserUpdate" asp-route-id="@item.Id">Güncelle</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-userId="@item.Id" onclick="return confirm('@item.FirstName isimli kullanıcıyı silmek istiyor musunuz?')">Sil</a>
             </td>
         </tr>
     }

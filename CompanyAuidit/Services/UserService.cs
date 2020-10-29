@@ -16,6 +16,13 @@ namespace CompanyAuidit.Services
             _context = context;
         }
 
-       
+        public override void Delete(User user,int userId)
+        {
+
+            var items = _context.UserItems.Where(x => x.UserId == userId).ToList();
+            _context.UserItems.RemoveRange(items);
+
+            base.Delete(user,userId);
+        }
     }
 }

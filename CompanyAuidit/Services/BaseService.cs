@@ -31,7 +31,7 @@ namespace CompanyAuidit.Services
             _context.SaveChanges();
         }
 
-        public void Delete(TEntity entity)
+        public virtual void Delete(TEntity entity, int id)
         {
             _context.Set<TEntity>().Remove(entity);
             _context.SaveChanges();
