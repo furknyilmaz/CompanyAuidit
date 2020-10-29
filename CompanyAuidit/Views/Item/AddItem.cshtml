@@ -1,4 +1,6 @@
-﻿@model CompanyAuidit.Models.AddItemViewModel
+﻿@using CompanyAuidit.Helpers
+@model CompanyAuidit.Models.AddItemViewModel
+@inject DropdownHelper DdlHelper
 @{
     ViewData["Title"] = "AddItem";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -34,44 +36,44 @@
         </form>
     </div>*@
 
-<form asp-controller="Item" asp-action="AddItem" method="post" autocomplete="off" class="form">
+<form asp-controller="Item"  method="post" autocomplete="off" class="form">
     <div class="form-inner">
         <h2>
             Eşya Ekle
         </h2>
         <div>
-            <select asp-for="CategoryId"  asp-items="Model.CategorySelectList" class="form-control">
+            <select asp-for="CategoryId"  asp-items="DdlHelper.CategoryDropdown()" class="form-control">
                 <option value="">Kategori Seç</option>
             </select>
         </div>
         <div class="input-wrapper">
             <label>Adı</label>
             <div class="input-group">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.ItemType.Name" required="" placeholder="Adı" />
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.Name" required="" placeholder="Adı" />
             </div>
         </div>
         <div class="input-wrapper">
             <label>Açıklama</label>
             <div class="input-group">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.Item.Description" required="" placeholder="Açıklama" />
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.Description" required="" placeholder="Açıklama" />
             </div>
         </div>
         <div class="input-wrapper">
             <label>Değer</label>
             <div class="input-group">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.Item.Cost" required="" placeholder="Değer" />
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.Cost" required="" placeholder="Değer" />
             </div>
         </div>
      
         <div class="input-wrapper">
             <label>Seri Numarası</label>
             <div class="input-group">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input  asp-for="@Model.Item.SerialNumber" required="" placeholder="Seri Numarası" />
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input  asp-for="@Model.SerialNumber" required="" placeholder="Seri Numarası" />
             </div>
         </div>
         <div class="btn-group">
-            <button type="submit" asp-action="AddItem" class="btn btn-success">Kaydet</button>
-            <button type="submit" asp-action="AddItem2" class="btn btn-primary">Kaydet ve GeriDön</button>
+            <button type="submit" asp-route-return="false" class="btn btn-success">Kaydet</button>
+            <button type="submit" asp-route-return="true" class="btn btn-primary">Kaydet ve GeriDön</button>
             <a class="btn btn-dark" href="/Item/ItemList">Vazgeç</a>
         </div>
     </div>

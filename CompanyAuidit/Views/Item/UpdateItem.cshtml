@@ -1,4 +1,4 @@
-﻿@model CompanyAuidit.Models.Item
+﻿@model CompanyAuidit.Models.AddItemViewModel
 @{
     ViewData["Title"] = "UpdateItem";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,7 +19,7 @@
         <div class="input-wrapper">
             <label>Adı</label>
             <div class="input-group">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.ItemType.Name" required="" placeholder="Adı" />
+                <span class="icon"><svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path></svg></span><input asp-for="@Model.Name" required="" placeholder="Adı" />
             </div>
         </div>
         <div class="input-wrapper">

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CompanyAuidit.Helpers;
 using CompanyAuidit.Models;
 using CompanyAuidit.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,77 +13,65 @@ namespace CompanyAuidit.Controllers
         private readonly UserItemService _userItemService;
         private readonly ItemService _itemService;
         private readonly CategoryService _categoryService;
+        private readonly DropdownHelper _dropdownHelper;
 
 
-        public ItemController(UserItemService userItemService, ItemService itemService, CategoryService categoryService)
+        public ItemController(UserItemService userItemService, ItemService itemService, CategoryService categoryService, DropdownHelper dropdownHelper)
         {
             _userItemService = userItemService;
             _itemService = itemService;
             _categoryService = categoryService;
+            _dropdownHelper = dropdownHelper;
         }
 
         [HttpGet]
         public IActionResult AddItem()
         {
-            var categories = _itemService.GetCategory();
-            var categoryList = categories.Select(r => new { r.Id, r.Name }).ToList();
-            var model = new AddItemViewModel
-            {
-                CategorySelectList = new SelectList(categoryList,"Id","Name")
-            };
-            return View(model);
+          
+            return View();
         }
 
 
         [HttpPost]
-        public IActionResult AddItem(AddItemViewModel model)
+        public IActionResult AddItem(AddItemViewModel model, bool @return)
         {
             if (ModelState.IsValid)
             {
-                var categories = _itemService.GetCategory();
-                var categoryName = categories.Where(x => x.Id == Convert.ToInt32(model.CategoryId)).Select(category => category.Name).Distinct();
+
+                _dropdownHelper.CategoryDropdown();
                 Item item = new Item()
                 {
-                    SerialNumber = model.Item.SerialNumber,
-                    Description = model.Item.Description,
-                    Cost = model.Item.Cost,
-                    ItemType = new ItemType
-                    {
-                        Name = model.ItemType.Name,
-                        Category = new Category
-                        {
-                            Id = Convert.ToInt32(model.CategoryId),
-                          //  Name =categoryName.
-                        }
-                    }
-                };
-
-                _itemService.Add(item);
-
-            }
-
-            return RedirectToAction(nameof(AddItem));
-        }
-
-        [HttpPost]
-        public IActionResult AddItem2(Item model)
-        {
-            if (ModelState.IsValid)
-            {
-                Item item = new Item()
-                {
+                    
                     SerialNumber = model.SerialNumber,
                     Description = model.Description,
                     Cost = model.Cost,
-                    ItemType = model.ItemType
+                    ItemType = new ItemType
+                    {
+                        Name = model.Name,
+                        CategoryId = model.CategoryId
+                        
+
+                    }
+
 
                 };
 
                 _itemService.Add(item);
 
             }
-            return RedirectToAction(nameof(ItemList));
+            else
+            {
+              
+     
+                return View(model);
+            }
+
+            if (@return)
+                return RedirectToAction(nameof(ItemList));
+            return View();
         }
+
+        
 
         public IActionResult ItemList()
         {
@@ -115,6 +104,7 @@ namespace CompanyAuidit.Controllers
         {
             if (ModelState.IsValid)
             {
+                _dropdownHelper.CategoryDropdown();
                 Item item = new Item()
                 {
                     SerialNumber = model.SerialNumber,
