@@ -1,0 +1,61 @@
+﻿@model UserItemViewModel
+@{
+    ViewData["Title"] = "Items";
+}
+
+<h1>@Model.User.FirstName  @Model.User.LastName</h1>
+<br>
+<table class="table " id="datatable">
+    <tr>
+        <th>Eşya</th>
+        <th>Değeri</th>
+        <th>Açıklama</th>
+        <th></th>
+        <th>
+            <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Eşya Ekle
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @foreach (var item in Model.Items)
+                {
+                    <a class="dropdown-item" asp-action="CreateItem" asp-route-userId="@Model.User.Id" asp-route-itemId="@item.Id">@item.ItemType.Name - @item.SerialNumber</a>
+                }
+            </div>
+        </div>
+
+            @*<select class="custom-select form-check  dropdown-toggle" multiple searchable="Search here..">
+                <option value="" disabled selected>Eşya Ekle</option>
+
+                @foreach (var item in Model.Items)s
+                {
+                    <option value="@item.Id">@item.ItemType.Name - @item.SerialNumber</option>
+                }
+            </select>*@
+
+        </th>
+    </tr>
+
+    @foreach (var userItem in Model.User.UserItems)
+    {
+        <tr>
+            <td>@userItem.Item.ItemType.Name</td>
+            <td>@userItem.Item.Cost</td>
+            <td>@userItem.Item.Description</td>
+            <td>
+                <a class="btn btn-danger" asp-controller="User" asp-action="ItemDelete"
+                   asp-route-userId="@Model.User.Id" asp-route-itemId="@userItem.Item.Id"
+                   onclick="return confirm('@userItem.Item.ItemType.Name adlı, @userItem.Item.SerialNumber seri numaralı eşyayı silmek istiyor musunuz?')">
+                    Sil
+                </a>
+            </td>
+            <th></th>
+        </tr>
+    }
+
+</table>
+
+@*<script>
+    $('.mdb-select').materialSelect({
+    });
+</script>*@
