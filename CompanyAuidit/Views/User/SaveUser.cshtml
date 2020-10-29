@@ -9,7 +9,7 @@
 
 <!DOCTYPE html>
 
-<form asp-controller="User" asp-action="SaveUser" method="post" autocomplete="off" class="form">
+<form asp-controller="User"  method="post" autocomplete="off" class="form">
     <div class="form-inner">
         <h2>
             Kullanıcı Ekle
@@ -39,8 +39,8 @@
             </div>
         </div>
         <div class="btn-group">
-            <button type="submit" asp-action="SaveUser" class="btn btn-success">Kaydet</button>
-            <button type="submit" asp-action="SaveUser2" class="btn btn-primary">Kaydet ve GeriDön</button>
+            <button type="submit" asp-route-return="false" class="btn btn-success">Kaydet</button>
+            <button type="submit" asp-route-return="true" class="btn btn-primary">Kaydet ve GeriDön</button>
             <a class="btn btn-dark" href="/User/UserList">Vazgeç</a>
         </div>
     </div>
