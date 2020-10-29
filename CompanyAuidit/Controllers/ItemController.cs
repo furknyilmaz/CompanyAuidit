@@ -77,23 +77,17 @@ namespace CompanyAuidit.Controllers
             return View(itemListViewModel);
         }
 
-        //public IActionResult DeleteItem(int id)
-        //{
-        //    Item item = new Item();
-        //    _itemService.Delete(item);
-
-        //    UserItem userItem = new UserItem();
-
-        //    var userItems = _userItemService.GetAll().Where(x => x.ItemId == item.Id);
-
-        //    _userItemService.Delete(userItem);
-
-
-        //    return RedirectToAction(nameof(ItemList));
-        //}
-
+        public IActionResult DeleteItem(int id)
+        {
+            var selectedItem = _itemService.GetAll().FirstOrDefault(x => x.Id == id);
+            var selectedItemWithType = _itemService.GetItemType().FirstOrDefault(x => x.Id == id);
+            _itemService.Delete(selectedItemWithType, id);
+            //var userItem = _userItemService.GetAll().FirstOrDefault(x => x.ItemId == id);
+            //_userItemService.Delete(userItem,id);
+            return RedirectToAction(nameof(ItemList));
+        }
         [HttpPost]
-        public IActionResult UpdateItem(Item model)
+        public IActionResult UpdateItem(UpdateItemViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -103,37 +97,36 @@ namespace CompanyAuidit.Controllers
                     SerialNumber = model.SerialNumber,
                     Description = model.Description,
                     Cost = model.Cost,
+                    Id = model.Id,
                     ItemType = new ItemType
                     {
-                        Name = model.ItemType.Name,
-                        CategoryId = model.ItemType.CategoryId
+                        Name = model.Name,
+                        CategoryId = model.CategoryId
                     }
                 };
                 TempData["ItemMessage"] = @$"Eşya {item.ItemType.Name} güncellendi";
                 _itemService.Update(item);
-
             }
-            //return View();
             return RedirectToAction(nameof(ItemList));
         }
-
         [HttpGet]
         public IActionResult UpdateItem(int id)
         {
-            var result = _itemService.GetAll().FirstOrDefault(x => x.Id == id);
-            var item = new Item();
-            if (ModelState.IsValid)
+            var selectedItem = _itemService.GetAll().FirstOrDefault(x => x.Id == id);
+            //_dropdownHelper.CategoryDropdown();
+            var selectedItemWithType = _itemService.GetItemType().FirstOrDefault(x => x.Id == id);
+            var item = new UpdateItemViewModel()
             {
-                if (result != null)
-                {
-                    item.Id = result.Id;
-                    item.ItemType.Name = result.ItemType.Name;
-                    item.Description = result.Description;
-                    item.Cost = result.Cost;
-                }
-            }
+                Description = selectedItemWithType.Description,
+                Cost = selectedItemWithType.Cost,
+                SerialNumber = selectedItemWithType.SerialNumber,
+                Name = selectedItemWithType.ItemType.Name,
+                CategoryId = selectedItemWithType.ItemType.CategoryId,
+                Id = id
+            };
             return View(item);
         }
+
 
         public IActionResult UserCreate(int userId, int itemId)
         {
