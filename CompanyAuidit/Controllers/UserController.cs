@@ -24,11 +24,11 @@ namespace CompanyAuidit.Controllers
         [HttpGet]
         public IActionResult SaveUser()
         {
-            return View(new User());
+            return View();
         }
 
         [HttpPost]
-        public IActionResult SaveUser(User model)
+        public IActionResult SaveUser(User model,bool @return)
         {
             if (ModelState.IsValid)
             {
@@ -43,26 +43,10 @@ namespace CompanyAuidit.Controllers
                 _userService.Add(user);
             }
 
-            return RedirectToAction(nameof(SaveUser));
+            if (@return)
+                return RedirectToAction(nameof(UserList));
+            return View();
 
-        }
-
-        [HttpPost]
-        public IActionResult SaveUser2(User model)
-        {
-            if (ModelState.IsValid)
-            {
-                User user = new User()
-                {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    Department = model.Department,
-                    Mission = model.Mission
-                };
-
-                _userService.Add(user);
-            }
-            return RedirectToAction(nameof(UserList));
         }
 
         public IActionResult UserList()
