@@ -119,20 +119,20 @@ namespace CompanyAuidit.Controllers
 
         public IActionResult Items(int userId)
         {
-            var model = new UserItemViewModel
-            {
-                User = _userService.Items(userId),
-                Items = _itemService.GetItems()
-            };
+            //var model = new UserItemViewModel
+            //{
+            //    User = _userService.Items(userId),
+            //    Items = _itemService.GetItems()
+            //};
 
-            var osman = model;
+            //var osman = model;
 
-            return View(model);
+            return View(/*model*/);
         }
 
         public IActionResult ItemDelete(int userId, int itemId)
         {
-            _userService.ItemDelete(userId, itemId);
+          //  _userService.ItemDelete(userId, itemId);
 
             return RedirectToAction("Items",new {userId});
         }

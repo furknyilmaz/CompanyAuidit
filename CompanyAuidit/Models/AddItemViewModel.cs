@@ -6,12 +6,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CompanyAuidit.Models
 {
+
     public class AddItemViewModel
     {
-        public Item Item { get; set; }
-        public ItemType ItemType { get; set; }
-        public List<Category> Categories { get; set; }
-        public SelectList CategorySelectList { get; set; }
-        public string CategoryId { get; set; }
+     
+        public int CategoryId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public double Cost { get; set; }
+        public string SerialNumber { get; set; }
     }
+
 }
