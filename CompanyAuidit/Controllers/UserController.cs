@@ -137,5 +137,10 @@ namespace CompanyAuidit.Controllers
             return RedirectToAction("Items",new {userId});
         }
 
+        public IActionResult ItemCreate(int userId, int itemId)
+        {
+            _userService.ItemCreate(userId, itemId);
+            return RedirectToAction("Items", new { userId });
+        }
     }
 }

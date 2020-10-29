@@ -41,5 +41,12 @@ namespace CompanyAuidit.Services
             _context.UserItems.Remove(userItem);
             _context.SaveChanges();
         }
+
+        public void ItemCreate(int userId, int itemId)
+        {
+            var result = new UserItem { UserId = userId, ItemId = itemId };
+            _context.UserItems.Add(result);
+            _context.SaveChanges();
+        }
     }
 }

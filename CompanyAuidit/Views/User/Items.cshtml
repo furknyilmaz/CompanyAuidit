@@ -19,19 +19,10 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 @foreach (var item in Model.Items)
                 {
-                    <a class="dropdown-item" asp-action="CreateItem" asp-route-userId="@Model.User.Id" asp-route-itemId="@item.Id">@item.ItemType.Name - @item.SerialNumber</a>
+                    <a class="dropdown-item" asp-action="ItemCreate" asp-route-userId="@Model.User.Id" asp-route-itemId="@item.Id">@item.ItemType.Name - @item.SerialNumber</a>
                 }
             </div>
         </div>
-
-            @*<select class="custom-select form-check  dropdown-toggle" multiple searchable="Search here..">
-                <option value="" disabled selected>Eşya Ekle</option>
-
-                @foreach (var item in Model.Items)s
-                {
-                    <option value="@item.Id">@item.ItemType.Name - @item.SerialNumber</option>
-                }
-            </select>*@
 
         </th>
     </tr>
@@ -55,7 +46,3 @@
 
 </table>
 
-@*<script>
-    $('.mdb-select').materialSelect({
-    });
-</script>*@
