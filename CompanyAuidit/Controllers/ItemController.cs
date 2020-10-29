@@ -105,8 +105,11 @@ namespace CompanyAuidit.Controllers
                     SerialNumber = model.SerialNumber,
                     Description = model.Description,
                     Cost = model.Cost,
-                    ItemType = model.ItemType
-
+                    ItemType = new ItemType
+                    {
+                        Name = model.ItemType.Name,
+                        CategoryId = model.ItemType.CategoryId
+                    }
                 };
                 TempData["ItemMessage"] = @$"Eşya {item.ItemType.Name} güncellendi";
                 _itemService.Update(item);
