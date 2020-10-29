@@ -12,11 +12,13 @@ namespace CompanyAuidit.Controllers
 {
     public class UserController : Controller
     {
-        private readonly UserService _context;
+        private readonly UserService _userService;
+        private readonly ItemService _itemService;
 
-        public UserController(UserService context)
+        public UserController(UserService userService, ItemService itemService)
         {
-            _context = context;
+            _userService = userService;
+            _itemService = itemService;
         }
 
         [HttpGet]
@@ -38,7 +40,7 @@ namespace CompanyAuidit.Controllers
                     Mission = model.Mission
                 };
 
-                _context.Add(user);
+                _userService.Add(user);
             }
 
             return RedirectToAction(nameof(SaveUser));
@@ -58,14 +60,14 @@ namespace CompanyAuidit.Controllers
                     Mission = model.Mission
                 };
 
-                _context.Add(user);
+                _userService.Add(user);
             }
             return RedirectToAction(nameof(UserList));
         }
 
         public IActionResult UserList()
         {
-            var result = _context.GetAll();
+            var result = _userService.GetAll();
             return View(result);
         }
 
@@ -84,7 +86,7 @@ namespace CompanyAuidit.Controllers
 
                 };
                 TempData["UserMessage"] = @$"Kullanıcı {user.FirstName} {user.LastName} güncellendi";
-                _context.Update(user);
+                _userService.Update(user);
             }
 
             return RedirectToAction(nameof(UserList));
@@ -93,7 +95,7 @@ namespace CompanyAuidit.Controllers
         [HttpGet]
         public IActionResult UserUpdate(int id)
         {
-            var result = _context.GetAll().FirstOrDefault(x => x.Id == id);
+            var result = _userService.GetAll().FirstOrDefault(x => x.Id == id);
 
             var user = new User();
 
@@ -107,5 +109,26 @@ namespace CompanyAuidit.Controllers
             }
             return View(user);
         }
+
+        public IActionResult Items(int userId)
+        {
+            var model = new UserItemViewModel
+            {
+                User = _userService.Items(userId),
+                Items = _itemService.GetItems()
+            };
+
+            var osman = model;
+
+            return View(model);
+        }
+
+        public IActionResult ItemDelete(int userId, int itemId)
+        {
+            _userService.ItemDelete(userId, itemId);
+
+            return RedirectToAction("Items",new {userId});
+        }
+
     }
 }
