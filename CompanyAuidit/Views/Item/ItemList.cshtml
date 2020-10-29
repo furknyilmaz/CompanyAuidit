@@ -18,8 +18,8 @@
         <th>Adı</th>
         <th>Durumu</th>
         <th>Değeri</th>
+        <th>Seri Numarası</th>
         <th><a class="btn btn-success" asp-action="AddItem">Eşya Ekle</a></th>
-        <th></th>
         <th>
             <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modal">Kategori Ekle</button>
             <div class="modal" id="modal">
@@ -29,17 +29,15 @@
                             <h2 class="modal-title">Kategori Ekle</h2>
                         </div>
                         <form asp-controller="Category" asp-action="Create">
-                            <div class="form-group">
                                 <table>
                                     <tr>
-                                        <td> <label asp-for="@Model.Category.Name" class="custom-control-label">Kategori Adı</label></td>
+                                        <td> <label asp-for="@Model.Category.Name">Kategori Adı</label></td>
                                         <td><input asp-for="@Model.Category.Name" /></td>
                                     </tr>
                                     <tr>
-                                        <td><input type="submit" class="btn btn-outline-danger" value="Kaydet" /></td>
+                                        <td></td><td align="right"><input type="submit" class="btn btn-outline-danger" value="Kaydet" /></td>
                                     </tr>
                                 </table>
-                            </div>
                         </form>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
