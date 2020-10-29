@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using CompanyAuidit.Models;
 using CompanyAuidit.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CompanyAuidit.Controllers
 {
@@ -10,7 +12,7 @@ namespace CompanyAuidit.Controllers
         private readonly UserItemService _userItemService;
         private readonly ItemService _itemService;
         private readonly CategoryService _categoryService;
-        
+
 
         public ItemController(UserItemService userItemService, ItemService itemService, CategoryService categoryService)
         {
@@ -30,22 +32,37 @@ namespace CompanyAuidit.Controllers
         [HttpGet]
         public IActionResult AddItem()
         {
-            return View(new Item());
+            var categories = _itemService.GetCategory();
+            var categoryList = categories.Select(r => new { r.Id, r.Name }).ToList();
+            var model = new AddItemViewModel
+            {
+                CategorySelectList = new SelectList(categoryList,"Id","Name")
+            };
+            return View(model);
         }
 
 
         [HttpPost]
-        public IActionResult AddItem(Item model)
+        public IActionResult AddItem(AddItemViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var categories = _itemService.GetCategory();
+                var categoryName = categories.Where(x => x.Id == Convert.ToInt32(model.CategoryId)).Select(category => category.Name).Distinct();
                 Item item = new Item()
                 {
-                    SerialNumber = model.SerialNumber,
-                    Description = model.Description,
-                    Cost = model.Cost,
-                    ItemType = model.ItemType
-
+                    SerialNumber = model.Item.SerialNumber,
+                    Description = model.Item.Description,
+                    Cost = model.Item.Cost,
+                    ItemType = new ItemType
+                    {
+                        Name = model.ItemType.Name,
+                        Category = new Category
+                        {
+                            Id = Convert.ToInt32(model.CategoryId),
+                          //  Name =categoryName.
+                        }
+                    }
                 };
 
                 _itemService.Add(item);

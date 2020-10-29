@@ -46,5 +46,9 @@ namespace CompanyAuidit.Services
         {
             return _context.Items.Include(x => x.ItemType).ToList();
         }
+        public List<Category> GetCategory()
+        {
+            return _context.ItemTypes.Select(x => x.Category).Distinct().ToList();
+        }
     }
 }
