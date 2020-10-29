@@ -8,5 +8,8 @@ namespace CompanyAuidit.Models
     public class ItemListViewModel
     {
         public List<Item> Items { get; set; }
+
+        //FURKAN ZEREY -- User'a ulaşmak için eklendi
+        public List<User> User { get; set; }
     }
 }

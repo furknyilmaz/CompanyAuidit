@@ -22,7 +22,6 @@ namespace CompanyAuidit.Services
             return result;
         }
 
-   
 
         public void UserCreate(int userId, int itemId)
         {

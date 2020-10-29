@@ -32,10 +32,23 @@
             <td>@item.SerialNumber</td>
             <td>
                 <a class="btn btn-danger" asp-action="DeleteItem" asp-route-id="@item.Id" onclick="return confirm('@item.ItemType.Name adlı eşyayı silmek istiyor musunuz?')">Sil</a>
-                <a class="btn btn-success" asp-action="UpdateItem" asp-route-id="@item.Id">Güncelle</a>
+                <a class="btn btn-primary" asp-action="UpdateItem" asp-route-id="@item.Id">Güncelle</a>
             </td>
             <td>
-            
+              
+               
+                <div class="dropdown">
+                    <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Kullanıcı İle İlişkilendir
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @foreach (var user in Model.User)
+                        {
+                            <a class="dropdown-item" asp-action="UserCreate" asp-route-userId="@user.Id" asp-route-itemId="@item.Id">@user.FirstName @user.LastName</a>
+                        }
+                    </div>
+                </div>
+
             </td>
 
         </tr>

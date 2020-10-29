@@ -16,6 +16,8 @@ namespace CompanyAuidit.Services
             _context = context;
         }
 
+
+        // FURKAN ZEREY -- Silme işlemine müdahale edildi.
         public override void Delete(User user,int userId)
         {
 
@@ -25,6 +27,9 @@ namespace CompanyAuidit.Services
             base.Delete(user,userId);
         }
 
+
+
+        // FURKAN ZEREY -- Kullanıcı ile eşya arasındaki ilişkiyi listeleme.
         public User Items(int userId)
         {
             return _context.Users
@@ -35,6 +40,7 @@ namespace CompanyAuidit.Services
                 .FirstOrDefault(user => user.Id == userId);
         }
 
+        // FURKAN ZEREY -- Kullanıcı üzerindeki eşyaların ilişkisini kesme.
         public void ItemDelete(int userId, int itemId)
         {
             var userItem = new UserItem { UserId = userId, ItemId = itemId };
@@ -42,6 +48,7 @@ namespace CompanyAuidit.Services
             _context.SaveChanges();
         }
 
+        // FURKAN ZEREY -- Kullanıcı üzerine eşya ekleme.
         public void ItemCreate(int userId, int itemId)
         {
             var result = new UserItem { UserId = userId, ItemId = itemId };

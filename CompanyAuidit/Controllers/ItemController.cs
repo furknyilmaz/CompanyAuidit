@@ -14,14 +14,15 @@ namespace CompanyAuidit.Controllers
         private readonly ItemService _itemService;
         private readonly CategoryService _categoryService;
         private readonly DropdownHelper _dropdownHelper;
+        private readonly UserService _userService;
 
-
-        public ItemController(UserItemService userItemService, ItemService itemService, CategoryService categoryService, DropdownHelper dropdownHelper)
+        public ItemController(UserItemService userItemService, ItemService itemService, CategoryService categoryService, DropdownHelper dropdownHelper, UserService userService)
         {
             _userItemService = userItemService;
             _itemService = itemService;
             _categoryService = categoryService;
             _dropdownHelper = dropdownHelper;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -31,13 +32,11 @@ namespace CompanyAuidit.Controllers
             return View();
         }
 
-
         [HttpPost]
         public IActionResult AddItem(AddItemViewModel model, bool @return)
         {
             if (ModelState.IsValid)
             {
-
                 _dropdownHelper.CategoryDropdown();
                 Item item = new Item()
                 {
@@ -52,12 +51,9 @@ namespace CompanyAuidit.Controllers
                 };
 
                 _itemService.Add(item);
-
             }
             else
             {
-
-
                 return View(model);
             }
 
@@ -66,13 +62,15 @@ namespace CompanyAuidit.Controllers
             return View();
         }
 
-
-
         public IActionResult ItemList()
         {
             var itemListViewModel = new ItemListViewModel
             {
-                Items = _itemService.GetAll()
+                Items = _itemService.GetAll(),
+
+                //FURKAN ZEREY -- Dropdowna userları göstermek için modele eklendi.
+                User=_userService.GetAll()
+
             };
 
             var item = _itemService.GetItemType();
@@ -137,11 +135,10 @@ namespace CompanyAuidit.Controllers
             return View(item);
         }
 
-        public IActionResult ItemCreate(int userId, int itemId)
+        public IActionResult UserCreate(int userId, int itemId)
         {
             _itemService.UserCreate(userId, itemId);
             return RedirectToAction("ItemList");
         }
     }
-
 }

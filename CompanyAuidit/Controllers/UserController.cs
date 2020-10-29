@@ -91,6 +91,8 @@ namespace CompanyAuidit.Controllers
 
             return RedirectToAction(nameof(UserList));
         }
+
+        //FURKAN ZEREY -- Silme işlemine müdahale edildi.
         public IActionResult Delete(int userId)
         {
             var user = new User { Id = userId };
@@ -117,6 +119,10 @@ namespace CompanyAuidit.Controllers
             return View(user);
         }
 
+
+
+
+        // FURKAN ZEREY -- Kullanıcı ile eşya arasındaki ilişkiyi listeleme.
         public IActionResult Items(int userId)
         {
             var model = new UserItemViewModel
@@ -125,21 +131,25 @@ namespace CompanyAuidit.Controllers
                 Items = _itemService.GetItems()
             };
 
-
             return View(model);
         }
 
+
+        // FURKAN ZEREY -- Kullanıcı üzerindeki eşyaların ilişkisini kesme.
         public IActionResult ItemDelete(int userId, int itemId)
         {
-          //  _userService.ItemDelete(userId, itemId);
+            _userService.ItemDelete(userId, itemId);
 
             return RedirectToAction("Items",new {userId});
         }
 
+
+        // FURKAN ZEREY -- Kullanıcı üzerine eşya ekleme.
         public IActionResult ItemCreate(int userId, int itemId)
         {
             _userService.ItemCreate(userId, itemId);
             return RedirectToAction("Items", new { userId });
         }
+
     }
 }
