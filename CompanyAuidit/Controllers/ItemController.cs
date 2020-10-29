@@ -41,7 +41,6 @@ namespace CompanyAuidit.Controllers
                 _dropdownHelper.CategoryDropdown();
                 Item item = new Item()
                 {
-                    
                     SerialNumber = model.SerialNumber,
                     Description = model.Description,
                     Cost = model.Cost,
@@ -49,11 +48,7 @@ namespace CompanyAuidit.Controllers
                     {
                         Name = model.Name,
                         CategoryId = model.CategoryId
-                        
-
                     }
-
-
                 };
 
                 _itemService.Add(item);
@@ -61,8 +56,8 @@ namespace CompanyAuidit.Controllers
             }
             else
             {
-              
-     
+
+
                 return View(model);
             }
 
@@ -71,7 +66,7 @@ namespace CompanyAuidit.Controllers
             return View();
         }
 
-        
+
 
         public IActionResult ItemList()
         {
@@ -139,6 +134,11 @@ namespace CompanyAuidit.Controllers
             return View(item);
         }
 
+        public IActionResult ItemCreate(int userId, int itemId)
+        {
+            _itemService.UserCreate(userId, itemId);
+            return RedirectToAction("ItemList");
+        }
     }
 
 }
