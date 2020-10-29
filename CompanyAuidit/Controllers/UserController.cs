@@ -94,7 +94,7 @@ namespace CompanyAuidit.Controllers
         public IActionResult Delete(int userId)
         {
             var user = new User { Id = userId };
-            _context.Delete(user,userId);
+            _userService.Delete(user,userId);
 
             return RedirectToAction(nameof(UserList));
         }
