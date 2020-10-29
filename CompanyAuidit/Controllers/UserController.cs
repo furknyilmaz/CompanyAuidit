@@ -54,7 +54,7 @@ namespace CompanyAuidit.Controllers
             var result = _userService.GetAll();
             return View(result);
         }
-
+        
         [HttpPost]
         public IActionResult UserUpdate(User model)
         {
