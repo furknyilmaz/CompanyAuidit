@@ -22,7 +22,7 @@ namespace CompanyAuidit.Services
             return result;
         }
 
-
+        
         public void UserCreate(int userId, int itemId)
         {
             var result = new UserItem { UserId = userId, ItemId = itemId };
