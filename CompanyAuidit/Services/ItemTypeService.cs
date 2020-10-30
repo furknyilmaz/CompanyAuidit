@@ -15,5 +15,10 @@ namespace CompanyAuidit.Services
             _context = context;
         }
 
+        public List<Category> GetCategory()
+        {
+            return _context.ItemTypes.Select(x => x.Category).Distinct().ToList();
+        }
+
     }
 }

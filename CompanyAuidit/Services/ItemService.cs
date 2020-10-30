@@ -30,5 +30,10 @@ namespace CompanyAuidit.Services
             _context.SaveChanges();
         }
 
+        public List<Item> GetItemType()
+        {
+            return _context.Items.Include(x => x.ItemType).ToList();
+        }
+
     }
 }
