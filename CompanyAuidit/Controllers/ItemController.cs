@@ -128,9 +128,19 @@ namespace CompanyAuidit.Controllers
         }
 
 
+        //FURKAN ZEREY -- Eşyayı kullanıcıya zimmetleme.
         public IActionResult UserCreate(int userId, int itemId)
         {
-            _itemService.UserCreate(userId, itemId);
+            int durum = _userItemService.GetAll().Count(x => x.ItemId == itemId);
+            if (durum < 1)
+            {
+                _itemService.UserCreate(userId, itemId);
+                TempData["ItemCreateMessage"] = "Eşya, kişiye başarı ile eklendi.";
+            }
+            else
+            {
+                TempData["ItemCreateMessage"] = "Eklemeye çalıştığınız eşya zaten zimmetli!";
+            }
             return RedirectToAction("ItemList");
         }
     }

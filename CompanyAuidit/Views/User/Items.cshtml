@@ -1,27 +1,35 @@
 ﻿@model UserItemViewModel
 @{
     ViewData["Title"] = "Items";
+    var itemCreateMessage = (string)TempData["ItemCreateMessage"];
 }
 
 <h1>@Model.User.FirstName  @Model.User.LastName</h1>
 <br>
+@if (itemCreateMessage != null)
+{
+    <div class="alert alert alert-warning" role="alert">
+        @itemCreateMessage
+    </div>
+}
 <table class="table " id="datatable">
     <tr>
         <th>Eşya</th>
         <th>Değeri</th>
+        <th>Seri Numarası</th>
         <th>Açıklama</th>
         <th>
             <div class="dropdown">
-            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Eşya Ekle
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                @foreach (var item in Model.Items)
-                {
-                    <a class="dropdown-item" asp-action="ItemCreate" asp-route-userId="@Model.User.Id" asp-route-itemId="@item.Id">@item.ItemType.Name - @item.SerialNumber</a>
-                }
+                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Eşya Ekle
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @foreach (var item in Model.Items)
+                    {
+                        <a class="dropdown-item" asp-action="ItemCreate" asp-route-userId="@Model.User.Id" asp-route-itemId="@item.Id">@item.ItemType.Name - @item.SerialNumber</a>
+                    }
+                </div>
             </div>
-        </div>
 
         </th>
     </tr>
@@ -31,6 +39,7 @@
         <tr>
             <td>@userItem.Item.ItemType.Name</td>
             <td>@userItem.Item.Cost</td>
+            <td>@userItem.Item.SerialNumber</td>
             <td>@userItem.Item.Description</td>
             <td>
                 <a class="btn btn-danger" asp-controller="User" asp-action="ItemDelete"

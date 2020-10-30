@@ -14,11 +14,13 @@ namespace CompanyAuidit.Controllers
     {
         private readonly UserService _userService;
         private readonly ItemService _itemService;
+        private readonly UserItemService _userItemService;
 
-        public UserController(UserService userService, ItemService itemService)
+        public UserController(UserService userService, ItemService itemService, UserItemService userItemService)
         {
             _userService = userService;
             _itemService = itemService;
+            _userItemService = userItemService;
         }
 
         [HttpGet]
@@ -131,7 +133,16 @@ namespace CompanyAuidit.Controllers
         // FURKAN ZEREY -- Kullanıcı üzerine eşya ekleme.
         public IActionResult ItemCreate(int userId, int itemId)
         {
-            _userService.ItemCreate(userId, itemId);
+            int durum = _userItemService.GetAll().Count(x => x.ItemId == itemId);
+            if (durum<1)
+            {
+                _userService.ItemCreate(userId, itemId);
+                TempData["ItemCreateMessage"] = "Eşya başarı ile eklendi.";
+            }
+            else
+            {
+                TempData["ItemCreateMessage"] = "Eklemeye çalıştığınız eşya zaten zimmetli!";
+            }
             return RedirectToAction("Items", new { userId });
         }
 
