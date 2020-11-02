@@ -20,7 +20,20 @@ namespace CompanyAuidit.Controllers
         [HttpPost]
         public IActionResult Create(Category category)
         {
-            _categoryService.Add(category);
+            var categoryList = _categoryService.GetCategories();
+            var categoryToAdd = categoryList.Find(x => x.Name == category.Name);
+
+            if (categoryToAdd != null)
+            {
+                TempData.Add("message", category.Name + " kategorisi zaten mevcut!");
+                return RedirectToAction("ItemList", "Item");
+            }
+            else
+            {
+                _categoryService.Add(category);
+                TempData.Add("message", category.Name + " kategorisi eklendi.");
+
+            }
             return RedirectToAction("ItemList", "Item");
         }
     }

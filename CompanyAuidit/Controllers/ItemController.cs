@@ -28,7 +28,7 @@ namespace CompanyAuidit.Controllers
         [HttpGet]
         public IActionResult AddItem()
         {
-          
+
             return View();
         }
 
@@ -66,11 +66,8 @@ namespace CompanyAuidit.Controllers
         {
             var itemListViewModel = new ItemListViewModel
             {
-                Items = _itemService.GetAll(),
-
-                
-                User=_userService.GetAll()
-
+                Items = _itemService.GetAll().OrderByDescending(item => item.Id).ToList(),
+                User = _userService.GetAll()
             };
 
             var item = _itemService.GetItemType();
@@ -128,7 +125,7 @@ namespace CompanyAuidit.Controllers
         }
 
 
-        
+
         public IActionResult UserCreate(int userId, int itemId)
         {
             int durum = _userItemService.GetAll().Count(x => x.ItemId == itemId);
