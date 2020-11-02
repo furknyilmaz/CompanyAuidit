@@ -53,7 +53,11 @@ namespace CompanyAuidit.Controllers
 
         public IActionResult UserList()
         {
-            var result = _userService.GetAll();
+
+            //var result = _userService.GetAll();
+            //return View(result);
+            
+            var result = _userService.GetAll().OrderByDescending(User=>User.Id).ToList();
             return View(result);
         }
         
