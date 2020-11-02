@@ -68,7 +68,7 @@ namespace CompanyAuidit.Controllers
             {
                 Items = _itemService.GetAll(),
 
-                //FURKAN ZEREY -- Dropdowna userları göstermek için modele eklendi.
+                
                 User=_userService.GetAll()
 
             };
@@ -128,7 +128,7 @@ namespace CompanyAuidit.Controllers
         }
 
 
-        //FURKAN ZEREY -- Eşyayı kullanıcıya zimmetleme.
+        
         public IActionResult UserCreate(int userId, int itemId)
         {
             int durum = _userItemService.GetAll().Count(x => x.ItemId == itemId);
