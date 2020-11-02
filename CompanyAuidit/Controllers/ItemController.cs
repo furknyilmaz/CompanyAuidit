@@ -68,9 +68,10 @@ namespace CompanyAuidit.Controllers
             {
                 Items = _itemService.GetAll().OrderByDescending(item => item.Id).ToList(),
                 User = _userService.GetAll()
-            };
+        };
 
-            var item = _itemService.GetItemType();
+            var items = _itemService.GetItemType();
+            var userItems = _userItemService.GetUserItems();
             return View(itemListViewModel);
         }
 
