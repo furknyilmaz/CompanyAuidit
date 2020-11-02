@@ -15,7 +15,7 @@ namespace CompanyAuidit.Controllers
         private readonly UserService _userService;
         private readonly ItemService _itemService;
         private readonly UserItemService _userItemService;
-
+        //deneme
         public UserController(UserService userService, ItemService itemService, UserItemService userItemService)
         {
             _userService = userService;
