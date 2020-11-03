@@ -59,7 +59,6 @@
     @foreach (var item in Model.Items)
     {
         var dropDownText = "Kullanıcı İle İlişkilendir";
-        var active = "dropdown-item";
         <tr>
             <td>@item.ItemType.Name</td>
             <td>@item.Description</td>
@@ -75,7 +74,6 @@
                     if (item.UserItems.Count > 0)
                     {
                         dropDownText = item.UserItems.FirstOrDefault().User.FirstName + " " + item.UserItems.FirstOrDefault().User.LastName;
-                        //active = "dropdown-item active";
                     }
                 }
                 <div class="dropdown">
@@ -85,7 +83,13 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         @foreach (var user in Model.User)
                         {
-                            <a class="@active" asp-action="UserCreate" asp-route-userId="@user.Id" asp-route-itemId="@item.Id">@user.FirstName @user.LastName</a>
+                            var classStyle = "dropdown-item";
+
+                            if (dropDownText == user.FirstName + " " + user.LastName)
+                            {
+                                classStyle += " active";
+                            }
+                            <a class="@classStyle" asp-action="UserCreate" asp-route-userId="@user.Id" asp-route-itemId="@item.Id">@user.FirstName @user.LastName</a>
                         }
                     </div>
                 </div>

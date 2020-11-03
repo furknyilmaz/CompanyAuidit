@@ -32,7 +32,7 @@ namespace CompanyAuidit.Services
 
         public List<Item> GetItemType()
         {
-            return _context.Items.Include(x => x.ItemType).ToList();
+            return _context.Items.Include(x => x.ItemType).ThenInclude(x=>x.Category).ToList();
         }
 
     }

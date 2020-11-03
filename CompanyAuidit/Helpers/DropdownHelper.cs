@@ -13,14 +13,16 @@ namespace CompanyAuidit.Helpers
         private readonly ItemService _itemService;
         private readonly CategoryService _categoryService;
         private ItemTypeService _itemTypeService;
+        private readonly UserService _userService;
 
 
-        public DropdownHelper(UserItemService userItemService, ItemService itemService, CategoryService categoryService, ItemTypeService itemTypeService)
+        public DropdownHelper(UserItemService userItemService, ItemService itemService, CategoryService categoryService, ItemTypeService itemTypeService, UserService userService)
         {
             _userItemService = userItemService;
             _itemService = itemService;
             _categoryService = categoryService;
             _itemTypeService = itemTypeService;
+            _userService = userService;
         }
         public  SelectList CategoryDropdown()
         {
